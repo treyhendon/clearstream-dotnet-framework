@@ -21,6 +21,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle( "ClearstreamDotNetFramework" )]
+[assembly: AssemblyDescription( ".NET Framework SDK for the clearstream.io API." )]
+[assembly: AssemblyCompany( "Luther Pierce Hendon, III" )]
 [assembly: AssemblyProduct( "ClearstreamDotNetFramework" )]
 [assembly: AssemblyCopyright( "Copyright © Luther Pierce Hendon, III 2019" )]
 
