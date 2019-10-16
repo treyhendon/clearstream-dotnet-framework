@@ -19,7 +19,7 @@ using System;
 namespace ClearstreamDotNetFramework.v1.Model.Webhook
 {
     /// <summary>
-    ///
+    /// The structure for an incoming webhook payload.
     /// </summary>
     public abstract class WebhookPayload
     {

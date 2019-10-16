@@ -19,7 +19,7 @@ using System;
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The reply details.
     /// </summary>
     public class Reply
     {

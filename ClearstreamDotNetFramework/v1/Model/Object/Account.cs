@@ -17,7 +17,7 @@
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The account details.
     /// </summary>
     public class Account
     {

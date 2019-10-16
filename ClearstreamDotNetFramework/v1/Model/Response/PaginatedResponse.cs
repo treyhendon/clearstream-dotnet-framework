@@ -17,7 +17,7 @@
 namespace ClearstreamDotNetFramework.v1.Model.Response
 {
     /// <summary>
-    ///
+    /// The structure for a paginated api response.
     /// </summary>
     public abstract class PaginatedResponse
     {

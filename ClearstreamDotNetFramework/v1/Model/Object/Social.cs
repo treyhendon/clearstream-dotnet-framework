@@ -17,7 +17,7 @@
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The social media settings for a <see cref="Message"/>.
     /// </summary>
     public class Social
     {

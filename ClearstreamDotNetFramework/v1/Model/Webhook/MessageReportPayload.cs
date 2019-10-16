@@ -19,7 +19,7 @@ using ClearstreamDotNetFramework.v1.Model.Object;
 namespace ClearstreamDotNetFramework.v1.Model.Webhook
 {
     /// <summary>
-    ///
+    /// The message report webhook payload.
     /// </summary>
     /// <seealso cref="ClearstreamDotNetFramework.v1.Model.Webhook.WebhookPayload" />
     public class MessageReportPayload : WebhookPayload

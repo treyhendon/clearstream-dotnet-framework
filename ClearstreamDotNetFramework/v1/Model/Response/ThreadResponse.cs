@@ -19,7 +19,7 @@ using ClearstreamDotNetFramework.v1.Model.Object;
 namespace ClearstreamDotNetFramework.v1.Model.Response
 {
     /// <summary>
-    ///
+    /// The api response for a single inbox thread.
     /// </summary>
     public class ThreadResponse
     {

@@ -20,7 +20,7 @@ using System.Collections.Generic;
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The chart statistics for the <see cref="OptIns.Past7Days"/>. A part of the <see cref="StatTotal"/>.
     /// </summary>
     public class Chart
     {

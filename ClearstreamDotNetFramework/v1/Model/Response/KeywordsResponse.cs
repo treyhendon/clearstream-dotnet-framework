@@ -20,7 +20,7 @@ using ClearstreamDotNetFramework.v1.Model.Object;
 namespace ClearstreamDotNetFramework.v1.Model.Response
 {
     /// <summary>
-    ///
+    /// The api response for multiple keywords.
     /// </summary>
     public class KeywordsResponse : PaginatedResponse
     {

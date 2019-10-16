@@ -19,7 +19,7 @@ using System.Collections.Generic;
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The <see cref="Keyword"/> opt-in and add to list status.
     /// </summary>
     public class OptIn
     {

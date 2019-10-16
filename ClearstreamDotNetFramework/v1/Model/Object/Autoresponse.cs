@@ -19,7 +19,7 @@ using static ClearstreamDotNetFramework.Enum;
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The <see cref="Keyword"/> auto-response configuration.
     /// </summary>
     public class Autoresponse
     {

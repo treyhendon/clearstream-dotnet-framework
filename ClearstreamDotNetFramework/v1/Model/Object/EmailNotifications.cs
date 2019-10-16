@@ -17,7 +17,7 @@
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The business email notification settings for the <see cref="User"/>.
     /// </summary>
     public class EmailNotifications
     {

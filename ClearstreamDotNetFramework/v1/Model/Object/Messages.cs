@@ -17,7 +17,7 @@
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The message <see cref="Stats"/> for an <see cref="Account"/>.
     /// </summary>
     public class Messages
     {

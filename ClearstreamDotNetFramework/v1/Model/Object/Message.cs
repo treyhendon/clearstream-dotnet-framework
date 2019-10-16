@@ -20,7 +20,7 @@ using System.Collections.Generic;
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The message details.
     /// </summary>
     public class Message
     {

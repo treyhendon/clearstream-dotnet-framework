@@ -20,7 +20,7 @@ using ClearstreamDotNetFramework.v1.Model.Object;
 namespace ClearstreamDotNetFramework.v1.Model.Response
 {
     /// <summary>
-    ///
+    /// The api response for multiple subscribers.
     /// </summary>
     /// <seealso cref="ClearstreamDotNetFramework.v1.Model.Response.PaginatedResponse" />
     public class SubscribersResponse : PaginatedResponse

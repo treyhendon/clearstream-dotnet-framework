@@ -19,7 +19,7 @@ using System.Collections.Generic;
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The subscriber details.
     /// </summary>
     public class Subscriber
     {

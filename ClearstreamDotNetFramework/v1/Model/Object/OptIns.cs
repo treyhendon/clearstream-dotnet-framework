@@ -17,7 +17,7 @@
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The opt-in <see cref="Stats"/>.
     /// </summary>
     public class OptIns
     {

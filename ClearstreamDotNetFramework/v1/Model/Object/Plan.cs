@@ -17,7 +17,7 @@
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The <see cref="Account"/> plan.
     /// </summary>
     public class Plan
     {

@@ -14,10 +14,12 @@
 // limitations under the License.
 // </copyright>
 
+using ClearstreamDotNetFramework.v1.Model.Webhook;
+
 namespace ClearstreamDotNetFramework.v1.Model.Object
 {
     /// <summary>
-    ///
+    /// The data payload when the <see cref="KeywordUsedPayload"/> webhook event is received.
     /// </summary>
     public class KeywordUsed
     {
