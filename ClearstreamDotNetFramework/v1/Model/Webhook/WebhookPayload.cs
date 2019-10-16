@@ -21,7 +21,7 @@ namespace ClearstreamDotNetFramework.v1.Model.Webhook
     /// <summary>
     ///
     /// </summary>
-    public class WebhookPayload
+    public abstract class WebhookPayload
     {
         /// <summary>
         /// Gets or sets the created at.

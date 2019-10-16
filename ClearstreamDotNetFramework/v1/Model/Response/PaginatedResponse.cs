@@ -19,7 +19,7 @@ namespace ClearstreamDotNetFramework.v1.Model.Response
     /// <summary>
     ///
     /// </summary>
-    public class PaginatedResponse
+    public abstract class PaginatedResponse
     {
         /// <summary>
         /// Gets or sets the count.
