@@ -14,6 +14,8 @@
 // limitations under the License.
 // </copyright>
 
+using System.Collections.Generic;
+using ClearstreamDotNetFramework.v1.Model.Object;
 using ClearstreamDotNetFramework.v1.Model.Response;
 using RestSharp;
 
@@ -22,12 +24,12 @@ namespace ClearstreamDotNetFramework.v1
     public partial class Client
     {
         /// <summary>
-        /// Gets all threads. https://api-docs.clearstream.io/#view-all-threads
+        /// Gets the threads. https://api-docs.clearstream.io/#view-all-threads
         /// </summary>
         /// <param name="limit">The limit.</param>
         /// <param name="page">The page.</param>
         /// <returns></returns>
-        public ThreadsResponse GetAllThreads( int? limit = null, int? page = null )
+        public ThreadsResponse GetThreads( int? limit = null, int? page = null )
         {
             var request = new RestRequest( "threads" );
             request.Method = Method.GET;
@@ -43,6 +45,38 @@ namespace ClearstreamDotNetFramework.v1
             }
 
             return Execute<ThreadsResponse>( request );
+        }
+
+        /// <summary>
+        /// Gets all threads.
+        /// </summary>
+        /// <returns></returns>
+        public List<Thread> GetAllThreads()
+        {
+            var threads = new List<Thread>();
+            var threadsResponse = GetThreads();
+
+            // if keywords, display the grid
+            if ( threadsResponse != null && threadsResponse.Count > 0 )
+            {
+                threads.AddRange( threadsResponse.Data );
+
+                // get all the pages of keywords
+                if ( threadsResponse.Pages > 1 )
+                {
+                    var limit = threadsResponse.Limit;
+                    var page = threadsResponse.CurrentPage;
+
+                    while ( page <= threadsResponse.Total )
+                    {
+                        page++;
+                        threadsResponse = GetThreads( limit, page );
+                        threads.AddRange( threadsResponse.Data );
+                    }
+                }
+            }
+
+            return threads;
         }
 
         /// <summary>
@@ -63,12 +97,55 @@ namespace ClearstreamDotNetFramework.v1
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public RepliesResponse GetThreadReplies( int id )
+        public RepliesResponse GetThreadReplies( int id, int? limit = null, int? page = null )
         {
             var request = new RestRequest( $"threads/{id}/replies" );
             request.Method = Method.GET;
 
+            if ( limit.HasValue )
+            {
+                request.AddParameter( "limit", limit, ParameterType.GetOrPost );
+            }
+
+            if ( page.HasValue )
+            {
+                request.AddParameter( "page", page, ParameterType.GetOrPost );
+            }
+
             return Execute<RepliesResponse>( request );
+        }
+
+        /// <summary>
+        /// Gets all thread replies.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public List<Reply> GetAllThreadReplies( int id )
+        {
+            var replies = new List<Reply>();
+            var repliesResponse = GetThreadReplies( id );
+
+            // if keywords, display the grid
+            if ( repliesResponse != null && repliesResponse.Count > 0 )
+            {
+                replies.AddRange( repliesResponse.Data );
+
+                // get all the pages of keywords
+                if ( repliesResponse.Pages > 1 )
+                {
+                    var limit = repliesResponse.Limit;
+                    var page = repliesResponse.CurrentPage;
+
+                    while ( page <= repliesResponse.Total )
+                    {
+                        page++;
+                        repliesResponse = GetThreadReplies( id, limit, page );
+                        replies.AddRange( repliesResponse.Data );
+                    }
+                }
+            }
+
+            return replies;
         }
 
         /// <summary>

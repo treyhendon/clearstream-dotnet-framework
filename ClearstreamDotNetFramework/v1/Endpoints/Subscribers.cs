@@ -15,6 +15,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using ClearstreamDotNetFramework.v1.Model.Object;
 using ClearstreamDotNetFramework.v1.Model.Response;
 using RestSharp;
 using static ClearstreamDotNetFramework.Enum;
@@ -24,16 +25,16 @@ namespace ClearstreamDotNetFramework.v1
     public partial class Client
     {
         /// <summary>
-        /// Gets all subscribers. https://api-docs.clearstream.io/#view-all-subscribers
+        /// Gets the subscribers. https://api-docs.clearstream.io/#view-all-subscribers
         /// </summary>
         /// <param name="limit">The limit.</param>
         /// <param name="page">The page.</param>
-        /// <param name="firstName">The first name to search for in the list.</param>
-        /// <param name="lastName">The last name to search for in the list.</param>
-        /// <param name="mobileNumber">The mobile number to search for in the list.</param>
+        /// <param name="firstName">The first name to search for.</param>
+        /// <param name="lastName">The last name to search for.</param>
+        /// <param name="mobileNumber">The mobile number to search for.</param>
         /// <param name="searchOperator">The search operator to use if multiple search params are provided.</param>
         /// <returns></returns>
-        public SubscribersResponse GetAllSubscribers( int? limit = null, int? page = null, string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND )
+        public SubscribersResponse GetSubscribers( int? limit = null, int? page = null, string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND )
         {
             var request = new RestRequest( "subscribers" );
             request.Method = Method.GET;
@@ -74,6 +75,42 @@ namespace ClearstreamDotNetFramework.v1
             }
 
             return Execute<SubscribersResponse>( request );
+        }
+
+        /// <summary>
+        /// Gets all subscribers.
+        /// </summary>
+        /// <param name="firstName">The first name to search for.</param>
+        /// <param name="lastName">The last name to search for.</param>
+        /// <param name="mobileNumber">The mobile number to search for.</param>
+        /// <param name="searchOperator">The search operator to use if multiple search params are provided.</param>
+        /// <returns></returns>
+        public List<Subscriber> GetAllSubscribers( string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND )
+        {
+            var subscribers = new List<Subscriber>();
+            var subscribersResponse = GetSubscribers( firstName: firstName, lastName: lastName, mobileNumber: mobileNumber, searchOperator: searchOperator );
+
+            // if keywords, display the grid
+            if ( subscribersResponse != null && subscribersResponse.Count > 0 )
+            {
+                subscribers.AddRange( subscribersResponse.Data );
+
+                // get all the pages of keywords
+                if ( subscribersResponse.Pages > 1 )
+                {
+                    var limit = subscribersResponse.Limit;
+                    var page = subscribersResponse.CurrentPage;
+
+                    while ( page <= subscribersResponse.Total )
+                    {
+                        page++;
+                        subscribersResponse = GetSubscribers( limit, page, firstName, lastName, mobileNumber, searchOperator );
+                        subscribers.AddRange( subscribersResponse.Data );
+                    }
+                }
+            }
+
+            return subscribers;
         }
 
         /// <summary>

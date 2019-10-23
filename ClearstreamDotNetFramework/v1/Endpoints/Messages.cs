@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using ClearstreamDotNetFramework.v1.Model.Object;
 using ClearstreamDotNetFramework.v1.Model.Response;
 using RestSharp;
 
@@ -24,12 +25,12 @@ namespace ClearstreamDotNetFramework.v1
     public partial class Client
     {
         /// <summary>
-        /// Gets all messages. https://api-docs.clearstream.io/#view-all-messages
+        /// Gets the messages. https://api-docs.clearstream.io/#view-all-messages
         /// </summary>
         /// <param name="limit">The limit.</param>
         /// <param name="page">The page.</param>
         /// <returns></returns>
-        public MessagesResponse GetAllMessages( int? limit = null, int? page = null )
+        public MessagesResponse GetMessages( int? limit = null, int? page = null )
         {
             var request = new RestRequest( "messages" );
             request.Method = Method.GET;
@@ -45,6 +46,38 @@ namespace ClearstreamDotNetFramework.v1
             }
 
             return Execute<MessagesResponse>( request );
+        }
+
+        /// <summary>
+        /// Gets all messages.
+        /// </summary>
+        /// <returns></returns>
+        public List<Message> GetAllMessages()
+        {
+            var messages = new List<Message>();
+            var messagesResponse = GetMessages();
+
+            // if keywords, display the grid
+            if ( messagesResponse != null && messagesResponse.Count > 0 )
+            {
+                messages.AddRange( messagesResponse.Data );
+
+                // get all the pages of keywords
+                if ( messagesResponse.Pages > 1 )
+                {
+                    var limit = messagesResponse.Limit;
+                    var page = messagesResponse.CurrentPage;
+
+                    while ( page <= messagesResponse.Total )
+                    {
+                        page++;
+                        messagesResponse = GetMessages( limit, page );
+                        messages.AddRange( messagesResponse.Data );
+                    }
+                }
+            }
+
+            return messages;
         }
 
         /// <summary>
@@ -90,7 +123,7 @@ namespace ClearstreamDotNetFramework.v1
                 request.AddParameter( "subscribers", string.Join( ",", subscribers.ToArray() ), ParameterType.GetOrPost );
             }
 
-            if ( isScheduled.HasValue && sendDateTime.HasValue && !string.IsNullOrWhiteSpace(timezone) )
+            if ( isScheduled.HasValue && sendDateTime.HasValue && !string.IsNullOrWhiteSpace( timezone ) )
             {
                 int isScheduledInt = isScheduled.Value ? 1 : 0;
                 request.AddParameter( "schedule", isScheduledInt, ParameterType.GetOrPost );
@@ -98,7 +131,7 @@ namespace ClearstreamDotNetFramework.v1
                 request.AddParameter( "timezone", timezone, ParameterType.GetOrPost );
             }
 
-            if (sendToFacebook.HasValue)
+            if ( sendToFacebook.HasValue )
             {
                 int sendToFacebookInt = sendToFacebook.Value ? 1 : 0;
                 request.AddParameter( "send_to_fb", sendToFacebookInt, ParameterType.GetOrPost );

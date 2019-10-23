@@ -14,6 +14,8 @@
 // limitations under the License.
 // </copyright>
 
+using System.Collections.Generic;
+using ClearstreamDotNetFramework.v1.Model.Object;
 using ClearstreamDotNetFramework.v1.Model.Response;
 using RestSharp;
 using static ClearstreamDotNetFramework.Enum;
@@ -44,6 +46,38 @@ namespace ClearstreamDotNetFramework.v1
             }
 
             return Execute<ListsResponse>( request );
+        }
+
+        /// <summary>
+        /// Gets all lists.
+        /// </summary>
+        /// <returns></returns>
+        public List<List> GetAllLists()
+        {
+            var lists = new List<List>();
+            var listsResponse = GetLists();
+
+            // if keywords, display the grid
+            if ( listsResponse != null && listsResponse.Count > 0 )
+            {
+                lists.AddRange( listsResponse.Data );
+
+                // get all the pages of keywords
+                if ( listsResponse.Pages > 1 )
+                {
+                    var limit = listsResponse.Limit;
+                    var page = listsResponse.CurrentPage;
+
+                    while ( page <= listsResponse.Total )
+                    {
+                        page++;
+                        listsResponse = GetLists( limit, page );
+                        lists.AddRange( listsResponse.Data );
+                    }
+                }
+            }
+
+            return lists;
         }
 
         /// <summary>
@@ -135,25 +169,25 @@ namespace ClearstreamDotNetFramework.v1
 
             var searchParams = 0;
 
-            if ( !string.IsNullOrWhiteSpace( firstName) )
+            if ( !string.IsNullOrWhiteSpace( firstName ) )
             {
                 request.AddParameter( "first", firstName, ParameterType.GetOrPost );
                 searchParams = searchParams + 1;
             }
 
-            if ( !string.IsNullOrWhiteSpace( lastName) )
+            if ( !string.IsNullOrWhiteSpace( lastName ) )
             {
                 request.AddParameter( "last", lastName, ParameterType.GetOrPost );
                 searchParams = searchParams + 1;
             }
 
-            if ( !string.IsNullOrWhiteSpace( mobileNumber) )
+            if ( !string.IsNullOrWhiteSpace( mobileNumber ) )
             {
                 request.AddParameter( "mobile_number", mobileNumber, ParameterType.GetOrPost );
                 searchParams = searchParams + 1;
             }
 
-            if ( searchParams > 1)
+            if ( searchParams > 1 )
             {
                 request.AddParameter( "operator", searchOperator.ToString(), ParameterType.GetOrPost );
             }

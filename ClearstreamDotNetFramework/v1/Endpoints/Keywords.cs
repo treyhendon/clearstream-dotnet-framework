@@ -15,6 +15,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using ClearstreamDotNetFramework.v1.Model.Object;
 using ClearstreamDotNetFramework.v1.Model.Response;
 using RestSharp;
 using static ClearstreamDotNetFramework.Enum;
@@ -24,12 +25,12 @@ namespace ClearstreamDotNetFramework.v1
     public partial class Client
     {
         /// <summary>
-        /// Gets all keywords. https://api-docs.clearstream.io/#view-all-keywords
+        /// Gets the keywords. https://api-docs.clearstream.io/#view-all-keywords
         /// </summary>
         /// <param name="limit">The limit.</param>
         /// <param name="page">The page.</param>
         /// <returns></returns>
-        public KeywordsResponse GetAllKeywords( int? limit = null, int? page = null )
+        public KeywordsResponse GetKeywords( int? limit = null, int? page = null )
         {
             var request = new RestRequest( "keywords" );
             request.Method = Method.GET;
@@ -45,6 +46,38 @@ namespace ClearstreamDotNetFramework.v1
             }
 
             return Execute<KeywordsResponse>( request );
+        }
+
+        /// <summary>
+        /// Gets all keywords.
+        /// </summary>
+        /// <returns></returns>
+        public List<Keyword> GetAllKeywords()
+        {
+            var keywords = new List<Keyword>();
+            var keywordsResponse = GetKeywords();
+
+            // if keywords, display the grid
+            if ( keywordsResponse != null && keywordsResponse.Count > 0 )
+            {
+                keywords.AddRange( keywordsResponse.Data );
+
+                // get all the pages of keywords
+                if ( keywordsResponse.Pages > 1 )
+                {
+                    var limit = keywordsResponse.Limit;
+                    var page = keywordsResponse.CurrentPage;
+
+                    while ( page <= keywordsResponse.Total )
+                    {
+                        page++;
+                        keywordsResponse = GetKeywords( limit, page );
+                        keywords.AddRange( keywordsResponse.Data );
+                    }
+                }
+            }
+
+            return keywords;
         }
 
         /// <summary>
