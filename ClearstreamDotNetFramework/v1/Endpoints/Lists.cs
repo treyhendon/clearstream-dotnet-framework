@@ -23,12 +23,12 @@ namespace ClearstreamDotNetFramework.v1
     public partial class Client
     {
         /// <summary>
-        /// Gets all lists. https://api-docs.clearstream.io/#view-all-lists
+        /// Gets the lists. https://api-docs.clearstream.io/#view-all-lists
         /// </summary>
         /// <param name="limit">The limit.</param>
         /// <param name="page">The page.</param>
         /// <returns></returns>
-        public ListResponse GetAllLists( int? limit = null, int? page = null )
+        public ListsResponse GetLists( int? limit = null, int? page = null )
         {
             var request = new RestRequest( "lists" );
             request.Method = Method.GET;
@@ -43,7 +43,7 @@ namespace ClearstreamDotNetFramework.v1
                 request.AddParameter( "page", page, ParameterType.GetOrPost );
             }
 
-            return Execute<ListResponse>( request );
+            return Execute<ListsResponse>( request );
         }
 
         /// <summary>
