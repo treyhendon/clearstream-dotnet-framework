@@ -88,24 +88,23 @@ namespace ClearstreamDotNetFramework.v1
         public List<Subscriber> GetAllSubscribers( string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND )
         {
             var subscribers = new List<Subscriber>();
-            var subscribersResponse = GetSubscribers( firstName: firstName, lastName: lastName, mobileNumber: mobileNumber, searchOperator: searchOperator );
+            var response = GetSubscribers( firstName: firstName, lastName: lastName, mobileNumber: mobileNumber, searchOperator: searchOperator );
 
-            // if keywords, display the grid
-            if ( subscribersResponse != null && subscribersResponse.Count > 0 )
+            if ( response != null && response.Count > 0 )
             {
-                subscribers.AddRange( subscribersResponse.Data );
+                subscribers.AddRange( response.Data );
 
-                // get all the pages of keywords
-                if ( subscribersResponse.Pages > 1 )
+                if ( response.Pages > 1 )
                 {
-                    var limit = subscribersResponse.Limit;
-                    var page = subscribersResponse.CurrentPage;
+                    var limit = response.Limit;
+                    var page = response.CurrentPage;
+                    var totalPages = response.Total;
 
-                    while ( page <= subscribersResponse.Total )
+                    while ( page <= totalPages )
                     {
                         page++;
-                        subscribersResponse = GetSubscribers( limit, page, firstName, lastName, mobileNumber, searchOperator );
-                        subscribers.AddRange( subscribersResponse.Data );
+                        response = GetSubscribers( limit, page, firstName, lastName, mobileNumber, searchOperator );
+                        subscribers.AddRange( response.Data );
                     }
                 }
             }

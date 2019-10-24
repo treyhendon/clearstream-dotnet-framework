@@ -54,24 +54,23 @@ namespace ClearstreamDotNetFramework.v1
         public List<Thread> GetAllThreads()
         {
             var threads = new List<Thread>();
-            var threadsResponse = GetThreads();
+            var response = GetThreads();
 
-            // if keywords, display the grid
-            if ( threadsResponse != null && threadsResponse.Count > 0 )
+            if ( response != null && response.Count > 0 )
             {
-                threads.AddRange( threadsResponse.Data );
+                threads.AddRange( response.Data );
 
-                // get all the pages of keywords
-                if ( threadsResponse.Pages > 1 )
+                if ( response.Pages > 1 )
                 {
-                    var limit = threadsResponse.Limit;
-                    var page = threadsResponse.CurrentPage;
+                    var limit = response.Limit;
+                    var page = response.CurrentPage;
+                    var totalPages = response.Total;
 
-                    while ( page <= threadsResponse.Total )
+                    while ( page <= totalPages )
                     {
                         page++;
-                        threadsResponse = GetThreads( limit, page );
-                        threads.AddRange( threadsResponse.Data );
+                        response = GetThreads( limit, page );
+                        threads.AddRange( response.Data );
                     }
                 }
             }
@@ -123,24 +122,23 @@ namespace ClearstreamDotNetFramework.v1
         public List<Reply> GetAllThreadReplies( int id )
         {
             var replies = new List<Reply>();
-            var repliesResponse = GetThreadReplies( id );
+            var response = GetThreadReplies( id );
 
-            // if keywords, display the grid
-            if ( repliesResponse != null && repliesResponse.Count > 0 )
+            if ( response != null && response.Count > 0 )
             {
-                replies.AddRange( repliesResponse.Data );
+                replies.AddRange( response.Data );
 
-                // get all the pages of keywords
-                if ( repliesResponse.Pages > 1 )
+                if ( response.Pages > 1 )
                 {
-                    var limit = repliesResponse.Limit;
-                    var page = repliesResponse.CurrentPage;
+                    var limit = response.Limit;
+                    var page = response.CurrentPage;
+                    var totalPages = response.Total;
 
-                    while ( page <= repliesResponse.Total )
+                    while ( page <= totalPages )
                     {
                         page++;
-                        repliesResponse = GetThreadReplies( id, limit, page );
-                        replies.AddRange( repliesResponse.Data );
+                        response = GetThreadReplies( id, limit, page );
+                        replies.AddRange( response.Data );
                     }
                 }
             }

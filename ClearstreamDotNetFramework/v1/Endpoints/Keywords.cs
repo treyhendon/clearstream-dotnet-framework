@@ -55,24 +55,23 @@ namespace ClearstreamDotNetFramework.v1
         public List<Keyword> GetAllKeywords()
         {
             var keywords = new List<Keyword>();
-            var keywordsResponse = GetKeywords();
+            var response = GetKeywords();
 
-            // if keywords, display the grid
-            if ( keywordsResponse != null && keywordsResponse.Count > 0 )
+            if ( response != null && response.Count > 0 )
             {
-                keywords.AddRange( keywordsResponse.Data );
+                keywords.AddRange( response.Data );
 
-                // get all the pages of keywords
-                if ( keywordsResponse.Pages > 1 )
+                if ( response.Pages > 1 )
                 {
-                    var limit = keywordsResponse.Limit;
-                    var page = keywordsResponse.CurrentPage;
+                    var limit = response.Limit;
+                    var page = response.CurrentPage;
+                    var totalPages = response.Total;
 
-                    while ( page <= keywordsResponse.Total )
+                    while ( page <= totalPages )
                     {
                         page++;
-                        keywordsResponse = GetKeywords( limit, page );
-                        keywords.AddRange( keywordsResponse.Data );
+                        response = GetKeywords( limit, page );
+                        keywords.AddRange( response.Data );
                     }
                 }
             }
