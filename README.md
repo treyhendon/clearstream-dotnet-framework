@@ -1,6 +1,9 @@
 # Clearstream .NET Framework
 ### A C# SDK for Clearstream.io
 
+# Available on Nuget
+[ClearstreamDotNetFramework](https://www.nuget.org/packages/ClearstreamDotNetFramework/)
+
 ## License
 ### Copyright 2019 by Luther Pierce Hendon, III  
 
