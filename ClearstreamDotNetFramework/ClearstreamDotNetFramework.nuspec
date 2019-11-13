@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/treyhendon/clearstream-dotnet-framework</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>.NET Framework SDK for the clearstream.io API.</description>
-    <releaseNotes>Minor bug fix with looping logic.</releaseNotes>
+    <releaseNotes>Fixed Webhook Response Object.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>clearstream sms</tags>
   </metadata>

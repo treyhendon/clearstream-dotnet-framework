@@ -21,8 +21,14 @@ namespace ClearstreamDotNetFramework.v1.Model.Object
     /// <summary>
     /// The optional response text message to send after the <see cref="KeywordUsedPayload"/> webhook event is received.
     /// </summary>
-    /// <seealso cref="ClearstreamDotNetFramework.v1.Model.Object.Text" />
-    public class Response : Text
+    public class WebhookResponse
     {
+        /// <summary>
+        /// Gets or sets the response.
+        /// </summary>
+        /// <value>
+        /// The response.
+        /// </value>
+        public Text Response { get; set; }
     }
 }
