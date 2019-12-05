@@ -191,7 +191,7 @@ namespace ClearstreamDotNetFramework.v1
                 request.AddParameter( "operator", searchOperator.ToString(), ParameterType.GetOrPost );
             }
 
-            return Execute<ListResponse>( request );
+            return Execute<SubscribersResponse>( request );
         }
     }
 }
