@@ -151,7 +151,7 @@ namespace ClearstreamDotNetFramework.v1
         /// <param name="mobileNumber">The mobile number to search for in the list.</param>
         /// <param name="searchOperator">The search operator to use if multiple search params are provided.</param>
         /// <returns></returns>
-        public ListResponse GetListSubscribers( int id, int? limit = null, int? page = null, string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND )
+        public SubscribersResponse GetListSubscribers( int id, int? limit = null, int? page = null, string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND )
         {
             var request = new RestRequest( $"lists/{id}/subscribers" );
             request.Method = Method.GET;
@@ -191,7 +191,7 @@ namespace ClearstreamDotNetFramework.v1
                 request.AddParameter( "operator", searchOperator.ToString(), ParameterType.GetOrPost );
             }
 
-            return Execute<ListResponse>( request );
+            return Execute<SubscribersResponse>( request );
         }
     }
 }
