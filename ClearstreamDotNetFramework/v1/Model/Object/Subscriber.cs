@@ -85,7 +85,7 @@ namespace ClearstreamDotNetFramework.v1.Model.Object
         /// <value>
         /// The created_at.
         /// </value>
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
         
         /// <summary>
         /// Gets or sets the updated_at.
@@ -93,7 +93,7 @@ namespace ClearstreamDotNetFramework.v1.Model.Object
         /// <value>
         /// The updated_at.
         /// </value>
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         
         /// <summary>
         /// Gets or sets the joined_at.
@@ -101,6 +101,6 @@ namespace ClearstreamDotNetFramework.v1.Model.Object
         /// <value>
         /// The joined_at.
         /// </value>
-        public DateTime JoinedAt { get; set; }
+        public DateTime? JoinedAt { get; set; }
     }
 }
