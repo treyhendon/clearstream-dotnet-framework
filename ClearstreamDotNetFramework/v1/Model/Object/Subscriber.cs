@@ -78,5 +78,29 @@ namespace ClearstreamDotNetFramework.v1.Model.Object
         ///   <c>true</c> if deleted; otherwise, <c>false</c>.
         /// </value>
         public bool? Deleted { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the created_at.
+        /// </summary>
+        /// <value>
+        /// The created_at.
+        /// </value>
+        public DateTime? CreatedAt { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the updated_at.
+        /// </summary>
+        /// <value>
+        /// The updated_at.
+        /// </value>
+        public DateTime? UpdatedAt { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the joined_at.
+        /// </summary>
+        /// <value>
+        /// The joined_at.
+        /// </value>
+        public DateTime? JoinedAt { get; set; }
     }
 }
