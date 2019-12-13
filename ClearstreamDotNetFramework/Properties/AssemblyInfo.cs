@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid( "6fb4d1a8-5f86-454d-94bb-fc1365523330" )]
 
 // Auto increment assembly versions
-[assembly: AssemblyVersion( "1.3.*" )]
+[assembly: AssemblyVersion( "1.4.*" )]
