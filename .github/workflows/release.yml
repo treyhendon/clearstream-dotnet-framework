@@ -13,8 +13,8 @@ jobs:
     runs-on: windows-latest
 
     env:
-      Solution_Name: ClearstreamDotNetFramework
-      Configuration: Release 
+      SOLUTION_NAME: ClearstreamDotNetFramework.sln
+      CONFIGURATION: Release 
 
     steps:
     - name: Checkout
@@ -31,13 +31,13 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
     
     - name: Restore NuGet Packages
-      run: nuget restore $env:Solution_Name
+      run: nuget restore ${{ env.SOLUTION_NAME }}
 
     - name: Build ClearstreamDotNetFramework
-      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration
+      run: msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ env.CONFIGURATION }}
     
     - name: Create NuGet Package
-      run: nuget pack -properties Configuration=$env:Configuration
+      run: nuget pack -properties Configuration=${{ env.CONFIGURATION }}
       working-directory: ./ClearstreamDotNetFramework/
     
     - name: Push NuGet Package
