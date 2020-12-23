@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+
+jobs:
+
+  build:
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: ClearstreamDotNetFramework
+      Configuration: Release 
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.5
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+    
+    - name: Restore NuGet Packages
+      run: nuget restore $env:Solution_Name
+
+    - name: Build ClearstreamDotNetFramework
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration
+    
+    - name: Create NuGet Package
+      run: nuget pack -properties Configuration=$env:Configuration
+      working-directory: ./ClearstreamDotNetFramework/
+    
+    - name: Push NuGet Package
+      run: nuget push *.nupkg -Source https://api.nuget.org/v3/index.json
+      working-directory: ./ClearstreamDotNetFramework/
+
+    
