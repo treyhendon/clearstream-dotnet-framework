@@ -186,7 +186,7 @@ namespace ClearstreamDotNetFramework.v1
                 searchParams = searchParams + 1;
             }
 
-            request.AddParameter( "status", status, ParameterType.GetOrPost );
+            request.AddParameter( "status", status.ToString(), ParameterType.GetOrPost );
             searchParams = searchParams + 1;
 
             if ( searchParams > 1 )
