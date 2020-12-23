@@ -179,7 +179,7 @@ namespace ClearstreamDotNetFramework.v1
         /// <param name="lastName">The last name.</param>
         /// <param name="email">The email.</param>
         /// <returns></returns>
-        public SubscriberResponse UpdateSubscriber( string mobileNumber, string firstName = null, string lastName = null, string email = null )
+        public SubscriberResponse UpdateSubscriber( string mobileNumber, string firstName = null, string lastName = null, string email = null, List<int> lists = null )
         {
             var request = new RestRequest( $"subscribers/{mobileNumber}" );
             request.Method = Method.PATCH;
@@ -197,6 +197,11 @@ namespace ClearstreamDotNetFramework.v1
             if ( !string.IsNullOrWhiteSpace( email ) )
             {
                 request.AddParameter( "email", email, ParameterType.GetOrPost );
+            }
+
+            if ( lists != null )
+            {
+                request.AddParameter( "lists", string.Join( ",", lists.ToArray() ), ParameterType.GetOrPost );
             }
 
             return Execute<SubscriberResponse>( request );
