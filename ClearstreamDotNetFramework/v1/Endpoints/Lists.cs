@@ -151,7 +151,7 @@ namespace ClearstreamDotNetFramework.v1
         /// <param name="mobileNumber">The mobile number to search for in the list.</param>
         /// <param name="searchOperator">The search operator to use if multiple search params are provided.</param>
         /// <returns></returns>
-        public SubscribersResponse GetListSubscribers( int id, int? limit = null, int? page = null, string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND )
+        public SubscribersResponse GetListSubscribers( int id, int? limit = null, int? page = null, string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND, SubscriberStatus status = SubscriberStatus.ACTIVE )
         {
             var request = new RestRequest( $"lists/{id}/subscribers" );
             request.Method = Method.GET;
@@ -186,12 +186,29 @@ namespace ClearstreamDotNetFramework.v1
                 searchParams = searchParams + 1;
             }
 
+            request.AddParameter( "status", status.ToString(), ParameterType.GetOrPost );
+            searchParams = searchParams + 1;
+
             if ( searchParams > 1 )
             {
                 request.AddParameter( "operator", searchOperator.ToString(), ParameterType.GetOrPost );
             }
 
             return Execute<SubscribersResponse>( request );
+        }
+
+        /// <summary>
+        /// Removes a subscriber from a list. https://api-docs.clearstream.io/#delete-a-subscriber
+        /// </summary>
+        /// <param name="mobileNumber">The mobile number.</param>
+        /// <param name="listId">The list id.</param>
+        /// <returns></returns>
+        public ListResponse DeleteListSubscriber( string mobileNumber, int listId )
+        {
+            var request = new RestRequest( $"lists/{listId}/subscribers/{mobileNumber}" );
+            request.Method = Method.DELETE;
+
+            return Execute<ListResponse>( request );
         }
     }
 }

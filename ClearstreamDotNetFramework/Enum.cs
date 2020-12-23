@@ -36,5 +36,16 @@ namespace ClearstreamDotNetFramework
             FIRST,
             NEW
         }
+
+        /// <summary>
+        /// Subscriber search status options.
+        /// </summary>
+        public enum SubscriberStatus
+        {
+            ACTIVE,
+            INACTIVE,
+            OPTOUT,
+            ANY
+        }
     }
 }
