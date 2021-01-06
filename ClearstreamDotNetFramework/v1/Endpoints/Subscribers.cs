@@ -88,10 +88,10 @@ namespace ClearstreamDotNetFramework.v1
         /// <param name="mobileNumber">The mobile number to search for.</param>
         /// <param name="searchOperator">The search operator to use if multiple search params are provided.</param>
         /// <returns></returns>
-        public List<Subscriber> GetAllSubscribers( string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND )
+        public List<Subscriber> GetAllSubscribers( string firstName = null, string lastName = null, string mobileNumber = null, SearchOperator searchOperator = SearchOperator.AND, SubscriberStatus status = SubscriberStatus.ACTIVE )
         {
             var subscribers = new List<Subscriber>();
-            var response = GetSubscribers( firstName: firstName, lastName: lastName, mobileNumber: mobileNumber, searchOperator: searchOperator );
+            var response = GetSubscribers( firstName: firstName, lastName: lastName, mobileNumber: mobileNumber, searchOperator: searchOperator, status: status );
 
             if ( response != null && response.Count > 0 )
             {
@@ -106,7 +106,7 @@ namespace ClearstreamDotNetFramework.v1
                     while ( page <= totalPages )
                     {
                         page++;
-                        response = GetSubscribers( limit, page, firstName, lastName, mobileNumber, searchOperator );
+                        response = GetSubscribers( limit, page, firstName, lastName, mobileNumber, searchOperator, status );
                         subscribers.AddRange( response.Data );
                     }
                 }
