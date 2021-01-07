@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription( ".NET Framework SDK for the clearstream.io API." )]
 [assembly: AssemblyCompany( "Luther Pierce Hendon, III" )]
 [assembly: AssemblyProduct( "ClearstreamDotNetFramework" )]
-[assembly: AssemblyCopyright( "Copyright © Luther Pierce Hendon, III 2019" )]
+[assembly: AssemblyCopyright( "Copyright © Luther Pierce Hendon, III 2021" )]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid( "6fb4d1a8-5f86-454d-94bb-fc1365523330" )]
 
 // Auto increment assembly versions
-[assembly: AssemblyVersion( "1.5.*" )]
+[assembly: AssemblyVersion( "1.6.*" )]
